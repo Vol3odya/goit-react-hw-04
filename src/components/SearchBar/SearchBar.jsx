@@ -1,4 +1,5 @@
-import {useState} from 'react'
+import { useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 
 import css from "./SearchBar.module.css"
 
@@ -8,6 +9,11 @@ export default function SearchBar({onSabmit}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (values.trim()==='') {
+      toast('Enter the correct value!');
+      setValues('');
+      return;
+    }
     onSabmit(values);
     setValues('');
   };
@@ -30,6 +36,10 @@ export default function SearchBar({onSabmit}) {
         />
         <button type="submit" onClick={handleSubmit} className={css.button}>Search</button>
       </form>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+      />
     </header>
   )
 }

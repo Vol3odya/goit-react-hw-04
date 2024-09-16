@@ -61,7 +61,6 @@ export default function App() {
 
   function modalOn(id) {
     setModal(id);
-    console.log(id);
   };
   
   function modalOff() { 

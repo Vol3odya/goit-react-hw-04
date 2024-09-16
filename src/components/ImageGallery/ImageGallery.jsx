@@ -8,7 +8,7 @@ export default function ImageGallery({ photo, modalId }) {
     <ul className={css.spis}>
       {photo.map((value) => {
         return (
-          <li key={value.id} className={css.cart} onClick={open(value.id)}>
+          <li key={value.id} className={css.cart}>
             <ImageCard value={value} modalId={modalId}/>  
           </li>);
       })}
