@@ -18,7 +18,7 @@ export default function App() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [photo, setPhoto] = useState([]);
+  const [photos, setPhotos] = useState([]);
 
   const [topic, setTopic] = useState("");
   const [page, setPage] = useState(1);
@@ -36,7 +36,7 @@ export default function App() {
         setLoading(true);
         setError(false);
         const res = await fetchPhoto(topic, page);
-        setPhoto((prevState) => [...prevState, ...res.photo]);
+        setPhotos((prevState) => [...prevState, ...res.photo]);
         setTotalPages(res.totalPages);
       } catch (error) {
         setError(true);
@@ -50,7 +50,7 @@ export default function App() {
  
 
   function search(text) {
-    setPhoto([]);
+    setPhotos([]);
     setTopic(text);
     setPage(1);
   };
@@ -61,6 +61,7 @@ export default function App() {
 
   function modalOn(id) {
     setModal(id);
+    console.log(id);
   };
   
   function modalOff() { 
@@ -71,11 +72,11 @@ export default function App() {
   return (
     <div className={css.container}>
       <SearchBar onSabmit={search} />
-      <ImageGallery photo={photo} modalId={modalOn} />
+      <ImageGallery photo={photos} modalId={modalOn} />
       {loading && <Loader />}
       {error && <ErrorMessage />}
-      {totalPages > page && photo.length > 0 && !loading && <LoadMoreBtn moreImages={more} />}
-      {modal && <ImageModal isOpen={modal} value={photo[photo.findIndex(el => el.id === modal)]} modalOff={modalOff} />}
+      {totalPages > page && photos.length > 0 && !loading && <LoadMoreBtn moreImages={more} />}
+      {modal && <ImageModal isOpen={modal} value={photos[photos.findIndex(el => el.id === modal)]} modalOff={modalOff} />}
     </div>
   )
 }
