@@ -71,7 +71,7 @@ export default function App() {
   return (
     <div className={css.container}>
       <SearchBar onSabmit={search} />
-      <ImageGallery photo={photos} modalId={modalOn} />
+      <ImageGallery photos={photos} modalId={modalOn} />
       {loading && <Loader />}
       {error && <ErrorMessage />}
       {totalPages > page && photos.length > 0 && !loading && <LoadMoreBtn moreImages={more} />}
